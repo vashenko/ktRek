@@ -3,8 +3,23 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: "AIzaSyAN6zpeAjj6mfrlynpZiWq4lEW-Fh_H2S4",
+    authDomain: "mobiletradingttest.firebaseapp.com",
+    databaseURL: "https://mobiletradingttest.firebaseio.com",
+    projectId: "mobiletradingttest",
+    storageBucket: "mobiletradingttest.appspot.com",
+    messagingSenderId: "339623612926"
+  }
 };
+
+// apiKey: "AIzaSyAN6zpeAjj6mfrlynpZiWq4lEW-Fh_H2S4",
+//   authDomain: "mobiletradingttest.firebaseapp.com",
+//   databaseURL: "https://mobiletradingttest.firebaseio.com",
+//   projectId: "mobiletradingttest",
+//   storageBucket: "mobiletradingttest.appspot.com",
+//   messagingSenderId: "339623612926"
 
 /*
  * In development mode, to ignore zone related error stack frames such as

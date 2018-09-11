@@ -1,0 +1,26 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="managerInfo">
+      <h4 class="managerName">{{index + 1}} {{manager.managerName}}</h4>
+      <div class="row">
+        <div class="card">
+          <div class="card-body " *ngFor="let order of manager.recommendedOrders">
+            <h5 class="card-title">Recommended Order</h5>
+            <p class="card-text">Creation date: {{order.creationDate}}</p>
+            <p class="card-text">Order status: {{order.status}}</p>
+            <p class="card-text" *ngFor="let product of order.orderProducts">
+              Summarycode: {{product.summarycode}}
+              <br>
+              Count: {{product.count}}
+              <br>
+              Price: {{product.price}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
