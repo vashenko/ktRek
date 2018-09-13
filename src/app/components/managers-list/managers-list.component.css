@@ -1,3 +1,37 @@
-table {
+/* Structure */
+.example-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.example-header {
+  min-height: 64px;
+  padding: 8px 24px 0;
+}
+
+.mat-form-field {
+  font-size: 14px;
   width: 100%;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+
+/* CSS ADDED TO SUPPORT MULTI-COLUMNS AND COLSPAN */
+.mat-header-cell, .mat-cell {
+  padding: 0 10px;
+}
+
+.header-group-row {
+  border: none;
+  align-items: stretch;
+}
+.header-group {
+  display: flex;
+  align-items: center;
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
 }

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
-
 import { Manager} from '../domains/manager.model';
 import { RecommendedOrders } from '../domains/recomendedOrder.model';
 import { OrderedProducts } from '../domains/OrderedProducts.model';
@@ -12,34 +11,23 @@ export class FirebaseService {
 
   recommendedOrders: RecommendedOrders[] = [];
 
-  constructor(private firebase: AngularFireDatabase) { }
+  constructor(private firebase: AngularFireDatabase) {}
 
-  getManagers(): Manager[] {
-    const managers: Manager[] = [];
-    this.firebase.list('/managers')
-      .valueChanges()
-      .subscribe((res): void => {
-        managers.length = 0;
-        res.forEach(item => {
-          managers.push(new Manager(item['managerName'], item['user1cId'], this.getRecommendedOrdersByUser1cId(item['user1cId'])));
-        });
-      });
-    return managers;
-  }
-
-  getRecommendedOrdersByUser1cId(user1cId: string): RecommendedOrders[] {
-    return this.getRecommendedOrders().filter(recOrd => {
+  getRecommendedOrdersByUser1cId(user1cId: string): number {
+    const result = this.getRecommendedOrders().filter(recOrd => {
       return recOrd.user1cId === user1cId;
     });
+    return result.length;
   }
 
   getRecommendedOrders(): RecommendedOrders[] {
-    this.firebase.list('/partnerPointRecommendedOrders/')
+    this.firebase.list('/partnerPointRecommendedOrders')
       .valueChanges()
       .subscribe(res => {
         this.recommendedOrders.length = 0;
         res.forEach(item => {
-          this.recommendedOrders.push(new RecommendedOrders(item['creationDate'], this.getOrderedProducts(item['orderProducts']), item['user1cId'], item['status']));
+          this.recommendedOrders.push(
+            new RecommendedOrders(item['creationDate'], this.getOrderedProducts(item['orderProducts']), item['user1cId'], item['status']));
         });
       });
     return this.recommendedOrders;
@@ -53,4 +41,3 @@ export class FirebaseService {
     return orderedProducts;
   }
 }
-

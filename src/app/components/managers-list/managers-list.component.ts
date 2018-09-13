@@ -1,26 +1,26 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FirebaseService} from '../../services/firebase.service';
-import { Manager } from '../../domains/manager.model';
-import { MatPaginator, MatSort} from '@angular/material';
-import { DataTableDataSource } from './data-table-datasource';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatPaginator, MatSort} from '@angular/material';
+import {DataTableDataSource} from './data-table-data-source';
+import {HttpService} from '../../services/http.service';
 
 @Component({
   selector: 'app-managers-list',
   templateUrl: './managers-list.component.html',
-  styleUrls: ['./managers-list.component.css']
+  styleUrls: ['./managers-list.component.css'],
 })
 export class ManagersListComponent implements OnInit {
-  managers: Manager[];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  dataSource: DataTableDataSource;
+  dataSource: DataTableDataSource | null;
 
-  constructor(private firebaseService: FirebaseService) {
-  }
+  showSpinner = true;
+
+  displayedColumns: string[] = ['Name', 'Recommended Orders'];
+
+  constructor(private httpService: HttpService) {}
 
   ngOnInit() {
-    this.dataSource = new DataTableDataSource(this.paginator, this.sort);
-    // this.managers = this.firebaseService.getManagers();
+    this.dataSource = new DataTableDataSource(this.paginator, this.sort, this.httpService);
   }
 
 }

@@ -10,6 +10,7 @@ import {SocialAuthService} from './services/social-auth.service';
 import { AngularFireModule} from 'angularfire2';
 import { AngularFireDatabaseModule} from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { environment } from '../environments/environment.prod';
 import { ManagersListComponent } from './components/managers-list/managers-list.component';
@@ -22,6 +23,11 @@ import { OrderedProductsConvertorPipe} from './pipes/array-convertor.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MaterialModule } from './material';
+import {HttpService} from './services/http.service';
+
+import { HttpClientModule} from '@angular/common/http';
+import {ConvertService} from './services/convert.service';
+
 
 
 const routes: Routes = [
@@ -44,12 +50,14 @@ const routes: Routes = [
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule.enablePersistence(),
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    HttpClientModule
 
   ],
-  providers: [FirebaseService, SocialAuthService],
+  providers: [FirebaseService, SocialAuthService, HttpService, ConvertService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
