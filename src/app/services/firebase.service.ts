@@ -9,8 +9,6 @@ import { OrderedProducts } from '../domains/OrderedProducts.model';
 })
 export class FirebaseService {
 
-  recommendedOrders: RecommendedOrders[] = [];
-
   constructor(private firebase: AngularFireDatabase) {}
 
   getRecommendedOrdersByUser1cId(user1cId: string): number {
@@ -21,21 +19,21 @@ export class FirebaseService {
   }
 
   getRecommendedOrders(): RecommendedOrders[] {
+    const recommendedOrders: RecommendedOrders[] = [];
     this.firebase.list('/partnerPointRecommendedOrders')
       .valueChanges()
       .subscribe(res => {
-        this.recommendedOrders.length = 0;
         res.forEach(item => {
-          this.recommendedOrders.push(
+          recommendedOrders.push(
             new RecommendedOrders(item['creationDate'], this.getOrderedProducts(item['orderProducts']), item['user1cId'], item['status']));
         });
       });
-    return this.recommendedOrders;
+    return recommendedOrders;
   }
 
   getOrderedProducts(Products: {}): OrderedProducts[] {
     const orderedProducts: OrderedProducts[] = [];
-    for(let val in Products) {
+    for (const val in Products) {
       orderedProducts.push(new OrderedProducts(Products[val].count, Products[val].price, Products[val].summarycode));
     }
     return orderedProducts;

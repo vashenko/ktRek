@@ -1,7 +1,11 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';;
 import {MatPaginator, MatSort} from '@angular/material';
-import {DataTableDataSource} from './data-table-data-source';
 import {HttpService} from '../../services/http.service';
+import {DataTableDataSource} from './data-table-data-source';
+import {Manager} from '../../domains/manager.model';
+import {Subject} from 'rxjs';
+import {ConvertService} from '../../services/convert.service';
+import {ScheduleService} from '../../services/schedule-service.service';
 
 @Component({
   selector: 'app-managers-list',
@@ -13,14 +17,13 @@ export class ManagersListComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   dataSource: DataTableDataSource | null;
 
-  showSpinner = true;
-
   displayedColumns: string[] = ['Name', 'Recommended Orders'];
 
-  constructor(private httpService: HttpService) {}
+  constructor(private httpService: HttpService, private convert: ConvertService, private scheduleService: ScheduleService) {}
 
   ngOnInit() {
     this.dataSource = new DataTableDataSource(this.paginator, this.sort, this.httpService);
   }
-
 }
+
+

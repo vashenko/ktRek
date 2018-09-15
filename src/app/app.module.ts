@@ -27,8 +27,7 @@ import {HttpService} from './services/http.service';
 
 import { HttpClientModule} from '@angular/common/http';
 import {ConvertService} from './services/convert.service';
-
-
+import {ScheduleService} from './services/schedule-service.service';
 
 const routes: Routes = [
   { path: '', redirectTo: 'log-in', pathMatch: 'full' },
@@ -57,7 +56,7 @@ const routes: Routes = [
     HttpClientModule
 
   ],
-  providers: [FirebaseService, SocialAuthService, HttpService, ConvertService],
+  providers: [FirebaseService, SocialAuthService, HttpService, ConvertService, ScheduleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

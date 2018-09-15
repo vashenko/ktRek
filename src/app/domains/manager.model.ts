@@ -1,4 +1,5 @@
-import {RecommendedOrders} from './recomendedOrder.model';
+import {ManagerClient} from './client.modetl';
+import {Subscription} from 'rxjs';
 
 export class Manager {
   constructor(
@@ -15,6 +16,13 @@ export class Manager {
               public unitName: string,
               public user1cId: string,
               public user1cName: string,
-              public recOrdersCount: number) {
+              public recOrdersCount: number,
+              ) {
+              // public Monday: ManagerClient[],
+              // public Tuesday: ManagerClient[],
+              // public Wednesday: ManagerClient[],
+              // public Thursday: ManagerClient[],
+              // public Friday: ManagerClient[],
+              // public AnyDay: ManagerClient[]) {
   }
 }
